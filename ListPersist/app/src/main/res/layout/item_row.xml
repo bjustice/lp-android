@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:drawable="@drawable/rowview_layer">
+
+    <CheckBox
+        android:id="@+id/listItemCheck"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/listItemName"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        android:layout_weight="10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="left|center"
+        android:textSize="25sp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/editListItem"
+        android:padding="5dp"
+        android:layout_weight="3"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:gravity="right|center"
+        android:textSize="25dp"
+        android:text="Edit"/>
+
+</LinearLayout>

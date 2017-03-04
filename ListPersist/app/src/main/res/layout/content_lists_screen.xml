@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:id="@+id/content_list_screen_master"
+    tools:context="com.brianjustice.listpersist.Screens.ListsScreen"
+    tools:showIn="@layout/activity_lists_screen">
+
+    <LinearLayout
+        android:id="@+id/lists_outer_scroll_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="5dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="@string/plus_sign"
+                android:id="@+id/addListButton" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:inputType="text"
+                android:layout_weight="10"
+                android:layout_height="match_parent"
+                android:hint="Grocery List"
+                android:imeOptions="actionDone"
+                android:id="@+id/addListEditText"
+                android:maxLines="1" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/android:list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

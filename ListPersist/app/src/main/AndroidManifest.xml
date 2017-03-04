@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.brianjustice.listpersist">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.brianjustice.listpersist.Screens.ListItemsScreen"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+
+        <service android:name="com.brianjustice.listpersist.datatools.SharedPreferenceService" />
+
+        <activity
+            android:name="com.brianjustice.listpersist.Screens.ListsScreen"
+            android:label="@string/title_activity_start_screen"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.brianjustice.listpersist.Screens.StartSplashScreen"
+            android:label="@string/title_activity_start_splash_screen"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.brianjustice.listpersist.Screens.EnterScreen"
+            android:label="@string/title_activity_enter_screen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.brianjustice.listpersist.TessTest"
+            android:label="@string/title_activity_tess_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.brianjustice.listpersist.CameraTest"
+            android:label="@string/title_activity_camera_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.brianjustice.listpersist.Screens.RegisterScreen"
+            android:label="@string/title_activity_register_screen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.brianjustice.listpersist.Screens.EditListScreen"
+            android:label="@string/title_activity_edit_list_screen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.brianjustice.listpersist.Screens.EditItemScreen"
+            android:label="@string/title_activity_edit_item_screen"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>
