@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -74,7 +75,7 @@ public class ItemBroadcastReceiver extends BroadcastReceiver{
         Intent intent = new Intent(context, SharedPreferenceService.class);
         intent.putExtra(SharedPreferenceService.URL,requestURL);
         intent.putExtra(SharedPreferenceService.PREFERENCESTRING,toCreateString);
-        Log.i("broadcast_url",requestURL);
+        Log.i("itembroadcast_url",requestURL);
         return intent;
     }
 
@@ -83,8 +84,9 @@ public class ItemBroadcastReceiver extends BroadcastReceiver{
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             int resultCode = bundle.getInt(SharedPreferenceService.RESULT);
-            SharedPreferences listData = context.getSharedPreferences("list", 0);
+            Log.i("ItemBRReceived",resultCode+"");
             if (resultCode == RESULT_OK) {
+                SharedPreferences listData = context.getSharedPreferences("list", 0);
                 switch (currentIntent) {
                     case CREATE_ADD_ITEM_STRING:
                         Log.i("ItemCase0", "Logged");
@@ -124,6 +126,9 @@ public class ItemBroadcastReceiver extends BroadcastReceiver{
                         Log.i("ItemCase5", "Logged");
                         break;
                 }
+            }
+            else{
+                Toast.makeText(context,"You must be connected to the internet to continue.",Toast.LENGTH_LONG).show();
             }
         }
     }

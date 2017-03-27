@@ -19,80 +19,55 @@ import static android.app.Activity.RESULT_OK;
 
 public class ListBroadcastReceiver extends BroadcastReceiver{
 
+    private String currentIntent;
+    public static final String ADD_LIST_STRING = "addliststring";
+    public static final String CHANGE_LIST_NAME_STRING = "changelistnamestring";
+    public static final String CHANGE_LIST_COLOR_STRING = "changelistcolorstring";
+    public static final String DELETE_LIST_STRING = "deleteliststring";
+    public static final String ALL_LIST_STRING = "allliststring";
     private ListRowBuilder listRowBuilder;
-    private ListBroadcastType currentIntent;
 
     public ListBroadcastReceiver(ListRowBuilder lrb){
         listRowBuilder = lrb;
     }
 
     public Intent createAddListIntent(Context context, String listName, String ownerID, String listColor){
-        currentIntent = ListBroadcastType.ADD_LIST;
-        //initialize broadcast receiver for accessing online list items
-        Intent intent = new Intent(context, SharedPreferenceService.class);
-
-        // add infos for the service which file to download and where to store
+        currentIntent = ADD_LIST_STRING;
         String addListURL = "http://www.listpersist.com/datawork/addlist.php?ownerID="+ownerID+"&listname="+listName+"&listcolor="+listColor;
-        intent.putExtra(SharedPreferenceService.URL,
-                addListURL);
-        intent.putExtra(SharedPreferenceService.PREFERENCESTRING,"addliststring");
-        Log.i("AddListURL",addListURL);
-        return intent;
+        return initializeIntent(context,addListURL,ADD_LIST_STRING);
     }
 
     public Intent createGetListIntent(Context context, String ownerID){
-        currentIntent = ListBroadcastType.GET_OWNED_LISTS;
-        //initialize broadcast receiver for accessing online list items
-        Intent intent = new Intent(context, SharedPreferenceService.class);
-
-        // add infos for the service which file to download and where to store
-        intent.putExtra(SharedPreferenceService.URL,
-                "http://www.listpersist.com/datawork/getownedlists.php?ownerID="+ownerID);
-        intent.putExtra(SharedPreferenceService.PREFERENCESTRING,"allliststring");
-        Log.i("GetListURL","http://www.listpersist.com/datawork/getownedlists.php?ownerID="+ownerID);
-        return intent;
+        currentIntent = ALL_LIST_STRING;
+        String getListURL = "http://www.listpersist.com/datawork/getownedlists.php?ownerID="+ownerID;
+        return initializeIntent(context,getListURL,ALL_LIST_STRING);
     }
 
     public Intent createDeleteListIntent(Context context, int listID){
-        currentIntent = ListBroadcastType.DELETE_LIST;
-        //initialize broadcast receiver for accessing online list items
-        Intent intent = new Intent(context, SharedPreferenceService.class);
-
-        // add infos for the service which file to download and where to store
-        intent.putExtra(SharedPreferenceService.URL,
-                "http://www.listpersist.com/datawork/deletelist.php?listid="+listID);
-        intent.putExtra(SharedPreferenceService.PREFERENCESTRING,"deleteliststring");
-        Log.i("DeleteListURL","http://www.listpersist.com/datawork/deletelistitem.php?listid="+listID);
-        return intent;
+        currentIntent = DELETE_LIST_STRING;
+        String deleteListURL = "http://www.listpersist.com/datawork/deletelist.php?listid="+listID;
+        return initializeIntent(context,deleteListURL, DELETE_LIST_STRING);
     }
 
     public Intent createChangeColorIntent(Context context, int listID, int listColor){
-        currentIntent = ListBroadcastType.CHANGE_COLOR;
-        //initialize broadcast receiver for accessing online list items
-        Intent intent = new Intent(context, SharedPreferenceService.class);
-
-        // add infos for the service which file to download and where to store
+        currentIntent = CHANGE_LIST_COLOR_STRING;
         String changeColorURL = "http://www.listpersist.com/datawork/changelist.php?changetype=COLOR&listid="+listID+"&newlistcolor="+listColor;
-
-        intent.putExtra(SharedPreferenceService.URL,
-                changeColorURL);
-        intent.putExtra(SharedPreferenceService.PREFERENCESTRING,"changelistcolorstring");
-        Log.i("ChangeColorURL",changeColorURL);
-        return intent;
+        return initializeIntent(context,changeColorURL,CHANGE_LIST_COLOR_STRING);
     }
 
     public Intent createChangeListNameIntent(Context context, int listID, String listName){
-        currentIntent = ListBroadcastType.CHANGE_NAME;
-        //initialize broadcast receiver for accessing online list items
-        Intent intent = new Intent(context, SharedPreferenceService.class);
-
-        // add infos for the service which file to download and where to store
+        currentIntent = CHANGE_LIST_NAME_STRING;
         String changeNameURL = "http://www.listpersist.com/datawork/changelist.php?changetype=NAME&listid="+listID+"&newlistname="+listName;
+        return initializeIntent(context,changeNameURL,CHANGE_LIST_NAME_STRING);
+    }
 
-        intent.putExtra(SharedPreferenceService.URL,
-                changeNameURL);
-        intent.putExtra(SharedPreferenceService.PREFERENCESTRING,"changelistnamestring");
-        Log.i("ChangeNameURL",changeNameURL);
+    private Intent initializeIntent(Context context, String requestURL, String toCreateString){
+        Intent intent = new Intent(context, SharedPreferenceService.class);
+        //url that is being accessed
+        intent.putExtra(SharedPreferenceService.URL,requestURL);
+        //preference string to save an returned data
+        intent.putExtra(SharedPreferenceService.PREFERENCESTRING, toCreateString);
+        Log.i("listbroadcast_url",requestURL);
         return intent;
     }
 
@@ -100,48 +75,35 @@ public class ListBroadcastReceiver extends BroadcastReceiver{
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
         if(bundle!=null && bundle.getInt(SharedPreferenceService.RESULT)==RESULT_OK) {
-            Log.i("IntentReceived",currentIntent.toString());
+            Log.i("IntentReceived", currentIntent.toString());
             SharedPreferences listData = context.getSharedPreferences("list", 0);
-            switch (currentIntent) {
-                case ADD_LIST:
-                    String addListItem = listData.getString("addliststring", "0 results");
-                    String[] splitItems = addListItem.split(",");
-                    if (splitItems.length > 1) {
+            String resultString = listData.getString(currentIntent, "0 results");
+            String[] splitItems = resultString.split(",");
+            if (splitItems.length > 1) {
+                switch (currentIntent) {
+                    case ADD_LIST_STRING:
                         try {
                             listRowBuilder.addList(splitItems[1], Integer.parseInt(splitItems[2]), 4, splitItems[3], splitItems[4]);
                         } catch (NumberFormatException e) {
                             Log.i("ListBroadcastCase0Error", e.toString());
                         }
-                    }
-                    break;
-                case GET_OWNED_LISTS:
-                    String allListItems = listData.getString("allliststring", "0 results");
-                    Log.i("ListItemString", allListItems);
-                    if (!allListItems.equals("0 results")) {
-                        String[] splitListItems = allListItems.split(",");
-                        for (int i = 0; i < splitListItems.length; i += 5) {
+                        break;
+                    case ALL_LIST_STRING:
+                        for (int i = 0; i < splitItems.length; i += 5) {
                             try {
-                                listRowBuilder.addList(splitListItems[i],
-                                        Integer.parseInt(splitListItems[i + 1]),
-                                        Integer.parseInt(splitListItems[i + 2]),
-                                        splitListItems[i + 3],
-                                        splitListItems[i + 4]);
+                                listRowBuilder.addList(splitItems[i],
+                                        Integer.parseInt(splitItems[i + 1]),
+                                        Integer.parseInt(splitItems[i + 2]),
+                                        splitItems[i + 3],
+                                        splitItems[i + 4]);
                             } catch (NumberFormatException e) {
                                 Log.i("ListBroadcastCase0Error", e.toString());
-                                Toast.makeText(context, "Invalid List data found", Toast.LENGTH_LONG).show();
                             }
                         }
-                    }
-                    break;
+                        break;
+                }
             }
         }
-    }
-    enum ListBroadcastType{
-        ADD_LIST,
-        GET_OWNED_LISTS,
-        DELETE_LIST,
-        CHANGE_COLOR,
-        CHANGE_NAME;
     }
 }
 

@@ -72,8 +72,7 @@ public class ListsScreen extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lists_screen);
-        //get read/write permission for file storage
-//        new FilePermissions().verifyStoragePermissions(this);
+
         Intent passedIntent = getIntent();
         String userID = passedIntent.getExtras().getString("userID");
 

@@ -48,7 +48,14 @@ public class ListRowBuilder extends ListsScreen{
         resetAdapter();
     }
 
-    //add new item to the list
+    /**
+     * Adds a new list and notfies view of the new list
+     * @param newItem String name of the new list being added.
+     * @param newItemID Unique int identifier of the new list.
+     * @param listColor Color of new list.
+     * @param inDate Input Date of new list.
+     * @param upDate Update Date of new list.
+     */
     public void addList(String newItem, int newItemID, int listColor, String inDate, String upDate){
         listDataAccess.addList(newItem,newItemID,listColor,inDate,upDate);
         listViewArrayAdapter.values.add(newItem);

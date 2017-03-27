@@ -11,7 +11,7 @@ import com.brianjustice.listpersist.R;
  * Created by Brian on 1/24/2017.
  */
 
-public class DarkButton extends Button {
+public class DarkButton extends android.support.v7.widget.AppCompatButton {
 
     public DarkButton(Context context) {
         super(context);
