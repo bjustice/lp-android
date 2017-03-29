@@ -167,16 +167,23 @@ public class ListItemsScreen extends ListActivity{
 
     private void initializeTopSpinner(final String[] listData){
         String[] listSelectorStrings = new String[listData.length/2];
+        String defaultListName = "";
         final ListsData allLists = new ListsData();
         for(int i=0; i < listData.length; i+=2){
             listSelectorStrings[i/2]=listData[i];
             allLists.addList(listData[i],Integer.parseInt(listData[i+1]),2,"0","0");
+            if(Integer.parseInt(listData[i+1])==listID){
+                defaultListName=listData[i];
+            }
         }
 
         final Spinner listSelectorSpinner = (Spinner) findViewById(R.id.list_selector_dropdown);
 
         ItemChangeListAdapter listSelectAdapter = new ItemChangeListAdapter(context,allLists.getListNames(),allLists);
         listSelectorSpinner.setAdapter(listSelectAdapter);
+
+        int defaultPosition = listSelectAdapter.getPosition(defaultListName);
+        listSelectorSpinner.setSelection(defaultPosition);
 
     }
 
