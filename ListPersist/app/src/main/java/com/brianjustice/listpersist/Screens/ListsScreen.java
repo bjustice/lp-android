@@ -165,7 +165,7 @@ public class ListsScreen extends ListActivity {
 
                 sortButtonWindow.setBackgroundDrawable(new BitmapDrawable());
                 sortButtonWindow.setFocusable(true);
-                sortButtonWindow.showAtLocation(view, Gravity.NO_GRAVITY,location[0]-(2*view.getWidth()),location[1]+view.getHeight());
+                sortButtonWindow.showAtLocation(view, Gravity.NO_GRAVITY,location[0]-(1*view.getWidth()),location[1]+view.getHeight());
 
                 TextView sortOptions = (TextView) customView.findViewById(R.id.sortOptionsTextView);
                 final Button sortAlphabetically = (Button) customView.findViewById(R.id.sortAlphabeticallyButton);

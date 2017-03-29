@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="2dp">
@@ -12,10 +13,11 @@
         android:id="@+id/sortOptionsTextView" />
 
     <Button
-        android:text="Alphabetically"
+        android:text="A-Z"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:padding="2dp"
         android:id="@+id/sortAlphabeticallyButton" />
 
 
@@ -24,20 +26,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:padding="2dp"
         android:id="@+id/sortByColorButton" />
 
     <Button
-        android:text="By Input Date"
+        android:text="Input Date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:padding="2dp"
         android:id="@+id/sortByInputDateButton" />
 
     <Button
-        android:text="Recently Updated"
+        android:text="Last Update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:padding="2dp"
         android:id="@+id/sortRecentlyUpdatedButton" />
 
 </LinearLayout>

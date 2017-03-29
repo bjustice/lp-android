@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.brianjustice.listpersist.EditReturnValues;
@@ -34,6 +35,8 @@ import com.brianjustice.listpersist.broadcastreceivertools.ItemBroadcastReceiver
 import com.brianjustice.listpersist.datatools.SharedPreferenceService;
 import com.brianjustice.listpersist.uitools.editlist.ColorValue;
 import com.brianjustice.listpersist.uitools.list.ListObject;
+import com.brianjustice.listpersist.uitools.list.ListsData;
+import com.brianjustice.listpersist.uitools.listitem.ItemChangeListAdapter;
 import com.brianjustice.listpersist.uitools.listitem.ItemsData;
 import com.brianjustice.listpersist.uitools.listitem.ItemRowBuilder;
 
@@ -163,18 +166,17 @@ public class ListItemsScreen extends ListActivity{
     }
 
     private void initializeTopSpinner(final String[] listData){
-        String[] topSpinnerStrings = new String[listData.length/2];
-        final List<ListObject> allLists = new ArrayList<>();
+        String[] listSelectorStrings = new String[listData.length/2];
+        final ListsData allLists = new ListsData();
         for(int i=0; i < listData.length; i+=2){
-            topSpinnerStrings[i/2]=listData[i];
-            allLists.add(new ListObject(listData[i],Integer.parseInt(listData[i+1]),2,"0","0",-1));
+            listSelectorStrings[i/2]=listData[i];
+            allLists.addList(listData[i],Integer.parseInt(listData[i+1]),2,"0","0");
         }
 
-        final Spinner topSpinner = (Spinner) findViewById(R.id.top_spinner);
+        final Spinner listSelectorSpinner = (Spinner) findViewById(R.id.list_selector_dropdown);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,topSpinnerStrings);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        topSpinner.setAdapter(spinnerArrayAdapter);
+        ItemChangeListAdapter listSelectAdapter = new ItemChangeListAdapter(context,allLists.getListNames(),allLists);
+        listSelectorSpinner.setAdapter(listSelectAdapter);
 
     }
 

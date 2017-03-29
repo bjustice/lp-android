@@ -33,5 +33,4 @@ public class DarkButton extends android.support.v7.widget.AppCompatButton {
         this.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         this.setHintTextColor(Color.WHITE);
     }
-
 }
