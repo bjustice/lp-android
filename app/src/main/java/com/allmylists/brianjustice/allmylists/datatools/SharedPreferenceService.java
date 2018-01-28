@@ -27,7 +27,6 @@ public class SharedPreferenceService extends IntentService {
 
     private int result = Activity.RESULT_CANCELED;
     private static final int NO_CONNECTION = 1234;
-    public static final String URL = "urlpath";
     public static final String RESULT = "result";
     public static final String PREFERENCESTRING = "listpreference";
     public static final String NOTIFICATION = "com.allmylists.brianjustice.allmylists";
@@ -65,14 +64,14 @@ public class SharedPreferenceService extends IntentService {
         String[] actionParameters = intent.getStringArrayExtra("action_parameters");
 
         if (hasConnection()) {
-            jsonTesting(requestTable,listPreference,action,actionParameters);
+            requestDataFromApi(requestTable,listPreference,action,actionParameters);
         } else {
             result = NO_CONNECTION;
             publishResults(result);
         }
     }
 
-    private void jsonTesting(String requestTable, String listPreference, String action, String[] actionParameters){
+    private void requestDataFromApi(String requestTable, String listPreference, String action, String[] actionParameters){
         InputStream inStream = null;
         HttpURLConnection conn;
         try {

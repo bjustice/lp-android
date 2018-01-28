@@ -105,33 +105,35 @@ public class ListsScreen extends ListActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+        int activityListId;
         super.onActivityResult(requestCode, resultCode, intent);
         if(requestCode == 1){
             Log.i("ListScreenResult",resultCode+"");
-            if(resultCode == EditListScreen.COLOR_CHANGE) {
-                int activityListId = intent.getIntExtra("listid", -1);
-                String passedColor = intent.getStringExtra("listcolor");
-                ColorValue colorValue = new ColorValue();
-                int listColor = colorValue.getColorInt(passedColor,context);
-
-                Log.i("ActivityListID ", activityListId + "");
-                listRowBuilder.changeListColor(activityListId, listColor);
-                startService(receiver.createChangeColorIntent(context,activityListId,listColor));
-                Log.i("EditActivityResult", "ReqCode " + requestCode + " ResCode" + resultCode + " Color " + listColor);
-
-            }
-            else if(resultCode == EditListScreen.NAME_CHANGE){
-                String newListName = intent.getStringExtra("newlistname");
-                int activityListId = intent.getIntExtra("listid", -1);
-                listRowBuilder.changeListName(activityListId,newListName);
-                startService(receiver.createChangeListNameIntent(context,activityListId,newListName));
-
-                Log.i("NewListName",newListName+" "+activityListId);
-            }
-            else if(resultCode == EditListScreen.DELETE_LIST){
-                int listID = intent.getIntExtra("listid",-1);
-                listRowBuilder.deleteList(listID);
-                startService(receiver.createDeleteListIntent(context,listID));
+            switch(resultCode){
+                case EditListScreen.COLOR_CHANGE:
+                    activityListId = intent.getIntExtra("listid", -1);
+                    String passedColor = intent.getStringExtra("listcolor");
+                    ColorValue colorValue = new ColorValue();
+                    int listColor = colorValue.getColorInt(passedColor,context);
+                    listRowBuilder.changeListColor(activityListId, listColor);
+                    Log.i("EditActivityResult", "ReqCode " + requestCode + " ResCode" + resultCode);
+                    startService(receiver.createChangeColorIntent(context,activityListId,listColor));
+                    break;
+                case EditListScreen.NAME_CHANGE:
+                    String newListName = intent.getStringExtra("newlistname");
+                    activityListId = intent.getIntExtra("listid", -1);
+                    listRowBuilder.changeListName(activityListId,newListName);
+                    Log.i("EditActivityResult", "ReqCode " + requestCode + " ResCode" + resultCode);
+                    startService(receiver.createChangeListNameIntent(context,activityListId,newListName));
+                    break;
+                case EditListScreen.DELETE_LIST:
+                    activityListId = intent.getIntExtra("listid",-1);
+                    listRowBuilder.deleteList(activityListId);
+                    Log.i("EditActivityResult", "ReqCode " + requestCode + " ResCode" + resultCode);
+                    startService(receiver.createDeleteListIntent(context,activityListId));
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -146,16 +148,13 @@ public class ListsScreen extends ListActivity {
 
                 View customView = inflater.inflate(R.layout.list_sort_popup,null);
 
-
                 // Initialize a new instance of popup window
                 sortButtonWindow = new PopupWindow(
                         customView,
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 );
-
                 // Set an elevation value for popup window
-                // Call requires API level 21
                 if(Build.VERSION.SDK_INT>=21){
                     sortButtonWindow.setElevation(5.0f);
                 }

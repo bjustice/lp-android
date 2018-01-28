@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class EditListScreen extends AppCompatActivity {
 
-    public static final int NAME_CHANGE = 0;
-    public static final int COLOR_CHANGE = 1;
-    public static final int DELETE_LIST = 2;
+    public static final int NAME_CHANGE = 1001;
+    public static final int COLOR_CHANGE = 1002;
+    public static final int DELETE_LIST = 1003;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
