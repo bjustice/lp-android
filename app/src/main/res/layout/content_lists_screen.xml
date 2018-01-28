@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:id="@+id/content_list_screen_master"
-    tools:context="com.brianjustice.listpersist.Screens.ListsScreen"
+    tools:context="com.allmylists.brianjustice.allmylists.Screens.ListsScreen"
     tools:showIn="@layout/activity_lists_screen">
 
     <LinearLayout

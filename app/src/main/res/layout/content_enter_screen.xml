@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.brianjustice.listpersist.Screens.EnterScreen"
+    tools:context="com.allmylists.brianjustice.allmylists.Screens.EnterScreen"
     tools:showIn="@layout/activity_enter_screen">
 
     <LinearLayout
@@ -80,6 +80,7 @@
                 android:id="@+id/sign_in_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
 
             </LinearLayout>
     </LinearLayout>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/registerTopLevel"
     android:fitsSystemWindows="true"
-    tools:context="com.brianjustice.listpersist.Screens.RegisterScreen">
+    tools:context="com.allmylists.brianjustice.allmylists.Screens.RegisterScreen">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

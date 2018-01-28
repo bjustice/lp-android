@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.brianjustice.listpersist.CameraTest">
+    tools:context="com.brianjustice.listpersist.com.allmylists.brianjustice.allmylists.CameraTest">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

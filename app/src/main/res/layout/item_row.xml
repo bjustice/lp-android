@@ -11,7 +11,7 @@
         android:paddingLeft="5dp"
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="25sp" />
 
@@ -19,7 +19,7 @@
         android:id="@+id/listItemName"
         android:paddingStart="5dp"
         android:paddingLeft="5dp"
-        android:layout_weight="10"
+        android:layout_weight="8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="left|center"
@@ -31,7 +31,7 @@
         android:padding="5dp"
         android:layout_weight="3"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="right|center"
         android:textSize="25dp"
         android:text="Edit"/>
