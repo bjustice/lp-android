@@ -93,54 +93,54 @@ public class ItemBroadcastReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-            int resultCode = bundle.getInt(SharedPreferenceService.RESULT);
-            Log.i("ItemBRReceived",resultCode+"");
-            if (resultCode == RESULT_OK) {
-                SharedPreferences listData = context.getSharedPreferences("list", 0);
-                switch (currentIntent) {
-                    case CREATE_ADD_ITEM_STRING:
-                        Log.i("ItemCase0", "Logged");
-                        String allListItems1 = listData.getString(CREATE_ADD_ITEM_STRING, "0 results");
-                        String[] splitListItems1 = allListItems1.split(",");
-                        Log.i("SplitListItem1-0",splitListItems1[0]);
-                        if(splitListItems1[0].equals("SUCCESS")){
-                            itemRowBuilder.addListItem(splitListItems1[2],Integer.parseInt(splitListItems1[1]), Color.WHITE);
-                        }
-                        break;
-                    case CREATE_GET_ITEM_STRING:
-                        Log.i("ItemCase1", "Logged");
-                        String allListItems2 = listData.getString(CREATE_GET_ITEM_STRING, "0 results");
-                        String[] splitListItems = allListItems2.split(",");
-                        if (splitListItems[0].equals("0 results")) {
-                            //// TODO: 2/25/2017 implement no items display 
-                        } else {
-                            for (int i = 0; i < splitListItems.length; i += 4) {
-                                if (splitListItems[i + 3].equals("0")) {
-                                    itemRowBuilder.addListItem(splitListItems[i + 1], Integer.parseInt(splitListItems[i]), Integer.parseInt(splitListItems[i + 2]));
-                                } else {
-                                    itemRowBuilder.addCompletedListItem(splitListItems[i + 1], Integer.parseInt(splitListItems[i]), Integer.parseInt(splitListItems[i + 2]));
-                                }
+        if (bundle == null) {
+            return;
+        }
+        int resultCode = bundle.getInt(SharedPreferenceService.RESULT);
+        Log.i("ItemBRReceived", resultCode + "");
+        if (resultCode == RESULT_OK) {
+            SharedPreferences listData = context.getSharedPreferences("list", 0);
+            switch (currentIntent) {
+                case CREATE_ADD_ITEM_STRING:
+                    Log.i("ItemCase0", "Logged");
+                    String allListItems1 = listData.getString(CREATE_ADD_ITEM_STRING, "0 results");
+                    String[] splitListItems1 = allListItems1.split(",");
+                    Log.i("SplitListItem1-0", splitListItems1[0]);
+                    if (splitListItems1[0].equals("SUCCESS")) {
+                        itemRowBuilder.addListItem(splitListItems1[2], Integer.parseInt(splitListItems1[1]), Color.WHITE);
+                    }
+                    break;
+                case CREATE_GET_ITEM_STRING:
+                    Log.i("ItemCase1", "Logged");
+                    String allListItems2 = listData.getString(CREATE_GET_ITEM_STRING, "0 results");
+                    String[] splitListItems = allListItems2.split(",");
+                    if (splitListItems[0].equals("0 results")) {
+                        //// TODO: 2/25/2017 implement no items display
+                    } else {
+                        for (int i = 0; i < splitListItems.length; i += 4) {
+                            if (splitListItems[i + 3].equals("0")) {
+                                itemRowBuilder.addListItem(splitListItems[i + 1], Integer.parseInt(splitListItems[i]), Integer.parseInt(splitListItems[i + 2]));
+                            } else {
+                                itemRowBuilder.addCompletedListItem(splitListItems[i + 1], Integer.parseInt(splitListItems[i]), Integer.parseInt(splitListItems[i + 2]));
                             }
                         }
-                        break;
-                    case CREATE_DELETE_ITEM_STRING:
-                        Log.i("ItemCase2", "Logged");
-                        break;
-                    case CREATE_CHECK_ITEM_STRING:
-                        Log.i("ItemCase3", "Logged");
-                        break;
-                    case CREATE_CHANGE_ITEM_COLOR_STRING:
-                        Log.i("ItemCase4", "Logged");
-                        break;
-                    case CREATE_CHANGE_ITEM_NAME_STRING:
-                        Log.i("ItemCase5", "Logged");
-                        break;
-                }
+                    }
+                    break;
+                case CREATE_DELETE_ITEM_STRING:
+                    Log.i("ItemCase2", "Logged");
+                    break;
+                case CREATE_CHECK_ITEM_STRING:
+                    Log.i("ItemCase3", "Logged");
+                    break;
+                case CREATE_CHANGE_ITEM_COLOR_STRING:
+                    Log.i("ItemCase4", "Logged");
+                    break;
+                case CREATE_CHANGE_ITEM_NAME_STRING:
+                    Log.i("ItemCase5", "Logged");
+                    break;
             }
-            else{
-                Toast.makeText(context,"You must be connected to the internet to continue.",Toast.LENGTH_LONG).show();
-            }
+        } else {
+            Toast.makeText(context, "You must be connected to the internet to continue.", Toast.LENGTH_LONG).show();
         }
     }
 

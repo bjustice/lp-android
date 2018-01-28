@@ -5,7 +5,7 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.allmylists.brianjustice.allmylists.Screens.ListItemsScreen;
+import com.allmylists.brianjustice.allmylists.screens.ListItemsScreen;
 
 import java.util.ArrayList;
 import java.util.List;

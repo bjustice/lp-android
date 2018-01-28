@@ -81,35 +81,37 @@ public class ListBroadcastReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        if(bundle!=null && bundle.getInt(SharedPreferenceService.RESULT)==RESULT_OK) {
-            Log.i("IntentReceived", currentIntent.toString());
-            SharedPreferences listData = context.getSharedPreferences("list", 0);
-            String resultString = listData.getString(currentIntent, "0 results");
-            String[] splitItems = resultString.split(",");
-            if (splitItems.length > 1) {
-                switch (currentIntent) {
-                    case ADD_LIST_STRING:
-                        try {
-                            listRowBuilder.addList(splitItems[1], Integer.parseInt(splitItems[2]), 4, splitItems[3], splitItems[4]);
-                        } catch (NumberFormatException e) {
-                            Log.i("ListBroadcastCase0Error", e.toString());
-                        }
-                        break;
-                    case ALL_LIST_STRING:
-                        for (int i = 0; i < splitItems.length; i += 5) {
-                            try {
-                                listRowBuilder.addList(splitItems[i],
-                                        Integer.parseInt(splitItems[i + 1]),
-                                        Integer.parseInt(splitItems[i + 2]),
-                                        splitItems[i + 3],
-                                        splitItems[i + 4]);
-                            } catch (NumberFormatException e) {
-                                Log.i("ListBroadcastCase0Error", e.toString());
-                            }
-                        }
-                        break;
+        if(bundle == null || bundle.getInt(SharedPreferenceService.RESULT)!=RESULT_OK) {
+            return;
+        }
+        Log.i("IntentReceived", currentIntent.toString());
+        SharedPreferences listData = context.getSharedPreferences("list", 0);
+        String resultString = listData.getString(currentIntent, "0 results");
+        String[] splitItems = resultString.split(",");
+        if (splitItems.length < 1) {
+            return;
+        }
+        switch (currentIntent) {
+            case ADD_LIST_STRING:
+                try {
+                    listRowBuilder.addList(splitItems[1], Integer.parseInt(splitItems[2]), 4, splitItems[3], splitItems[4]);
+                } catch (NumberFormatException e) {
+                    Log.i("ListBroadcastCase0Error", e.toString());
                 }
-            }
+                break;
+            case ALL_LIST_STRING:
+                for (int i = 0; i < splitItems.length; i += 5) {
+                    try {
+                        listRowBuilder.addList(splitItems[i],
+                                Integer.parseInt(splitItems[i + 1]),
+                                Integer.parseInt(splitItems[i + 2]),
+                                splitItems[i + 3],
+                                splitItems[i + 4]);
+                    } catch (NumberFormatException e) {
+                        Log.i("ListBroadcastCase0Error", e.toString());
+                    }
+                }
+                break;
         }
     }
 }

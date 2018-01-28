@@ -3,7 +3,7 @@ package com.allmylists.brianjustice.allmylists.uitools.list;
 import android.content.Context;
 import android.widget.ListView;
 
-import com.allmylists.brianjustice.allmylists.Screens.ListsScreen;
+import com.allmylists.brianjustice.allmylists.screens.ListsScreen;
 
 /**
  * Created by Brian on 10/8/2016.

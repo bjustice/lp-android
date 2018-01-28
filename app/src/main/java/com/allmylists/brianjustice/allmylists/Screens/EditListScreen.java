@@ -1,4 +1,4 @@
-package com.allmylists.brianjustice.allmylists.Screens;
+package com.allmylists.brianjustice.allmylists.screens;
 
 import android.content.Intent;
 import android.os.Bundle;

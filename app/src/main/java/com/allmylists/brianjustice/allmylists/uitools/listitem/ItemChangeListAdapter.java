@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.allmylists.brianjustice.allmylists.R;
-import com.allmylists.brianjustice.allmylists.Screens.ListItemsScreen;
+import com.allmylists.brianjustice.allmylists.screens.ListItemsScreen;
 import com.allmylists.brianjustice.allmylists.uitools.list.ListsData;
 
 import java.util.List;

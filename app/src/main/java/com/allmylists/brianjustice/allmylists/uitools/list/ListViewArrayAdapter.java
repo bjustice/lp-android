@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.allmylists.brianjustice.allmylists.R;
-import com.allmylists.brianjustice.allmylists.Screens.EditListScreen;
-import com.allmylists.brianjustice.allmylists.Screens.ListItemsScreen;
+import com.allmylists.brianjustice.allmylists.screens.EditListScreen;
+import com.allmylists.brianjustice.allmylists.screens.ListItemsScreen;
 
 import java.util.List;
 

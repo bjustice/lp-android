@@ -9,7 +9,7 @@
     android:paddingRight="16dp"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.allmylists.brianjustice.allmylists.Screens.ListItemsScreen"
+    tools:context="com.allmylists.brianjustice.allmylists.screens.ListItemsScreen"
     tools:showIn="@layout/activity_listitems">
 
     <LinearLayout

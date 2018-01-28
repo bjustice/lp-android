@@ -12,8 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.allmylists.brianjustice.allmylists.R;
-import com.allmylists.brianjustice.allmylists.Screens.EditItemScreen;
-import com.allmylists.brianjustice.allmylists.Screens.ListItemsScreen;
+import com.allmylists.brianjustice.allmylists.screens.EditItemScreen;
+import com.allmylists.brianjustice.allmylists.screens.ListItemsScreen;
 
 import java.util.List;
 

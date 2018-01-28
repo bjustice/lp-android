@@ -1,4 +1,4 @@
-package com.allmylists.brianjustice.allmylists.Screens;
+package com.allmylists.brianjustice.allmylists.screens;
 
 import android.app.Activity;
 import android.content.Context;
