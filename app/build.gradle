@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'ListPersistKey'
-            keyPassword '@chemEng123'
+            keyAlias ''
+            keyPassword ''
             storeFile file('C:/Users/Brian/Documents/ListPersist/ListPersistKS.jks')
-            storePassword '@chemEng123'
+            storePassword ''
         }
     }
     compileSdkVersion 25
